@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=WrkzCoin Wallet
+Comment=WrkzCoin wallet
+Exec=wkrzcoinwallet %U
+Terminal=false
+Type=Application
+Icon=wrkzcoin
+MimeType=x-scheme-handler/wrkzcoin;
+Categories=Office;Finance;
