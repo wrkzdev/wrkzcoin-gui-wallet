@@ -10,7 +10,7 @@ endforeach()
 
 #Set build version
 set(VERSION_MAJOR "0")
-set(VERSION_MINOR "1.0.3")
+set(VERSION_MINOR "1.2.8")
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}")
 find_package(Git QUIET)
 if(Git_FOUND OR GIT_FOUND)
@@ -112,6 +112,7 @@ file(GLOB_RECURSE CRYPTONOTE_SOURCES
   cryptonote/src/Common/VectorOutputStream.cpp
   cryptonote/src/Common/ScopeExit.cpp
   cryptonote/src/ConnectivityTool/ConnectivityTool.cpp
+  cryptonote/src/crypto/aesb.c
   cryptonote/src/crypto/blake256.c
   cryptonote/src/crypto/chacha8.c
   cryptonote/src/crypto/crypto-ops-data.c
@@ -129,7 +130,6 @@ file(GLOB_RECURSE CRYPTONOTE_SOURCES
   cryptonote/src/crypto/random.c
   cryptonote/src/crypto/skein.c
   cryptonote/src/crypto/slow-hash.c
-  cryptonote/src/crypto/slow-hash.cpp
   cryptonote/src/crypto/tree-hash.c
   cryptonote/src/CryptoNoteCore/*.cpp
   cryptonote/src/CryptoNoteProtocol/*.cpp
@@ -165,8 +165,6 @@ file(GLOB_RECURSE CRYPTONOTE_SOURCES
   cryptonote/src/System/Ipv4Address.cpp
   cryptonote/src/System/TcpStream.cpp
   cryptonote/src/JsonRpcServer/*.cpp
-  cryptonote/src/PaymentGate/*.cpp
-  cryptonote/src/PaymentGateService/*.cpp
   cryptonote/src/Miner/*.cpp
 )
 

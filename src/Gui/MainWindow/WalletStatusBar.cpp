@@ -174,6 +174,9 @@ void WalletStatusBar::synchronizationProgressUpdated(quint32 _current, quint32 _
   quint64 lastBlockTimestamp = m_nodeStateModel->index(0, NodeStateModel::COLUMN_LAST_LOCAL_BLOCK_TIMESTAMP).data(NodeStateModel::ROLE_LAST_LOCAL_BLOCK_TIMESTAMP).value<quint64>();
   quint64 timeDiff = currentDateTime - lastBlockTimestamp;
   QString formattedTimeDiff = lastBlockTimestamp > 0 ? formatTimeDiff(timeDiff) : tr("unknown");
+  // Fixing?
+  formattedTimeDiff = timeDiff > 0 ? formatTimeDiff(timeDiff) : tr("unknown");
+  
   QString blockchainAge = lastBlockTimestamp > 0 ? QStringLiteral("%1 ago").arg(formattedTimeDiff) : QStringLiteral("%1").arg(formattedTimeDiff);
 
   m_walletIsSynchronized = false;
@@ -248,7 +251,8 @@ void WalletStatusBar::updateStatusDescription() {
   }
 
   if (peerCount == 0) {
-    warningString.append(tr(" No network connection."));
+    //warningString.append(tr(" No network connection."));
+	warningString = tr(" No network connection.");
   }
 
   QString statusText = tr("Wallet synchronized. Top block height: %1  /  Time (UTC): %2%3");

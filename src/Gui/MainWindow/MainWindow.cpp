@@ -60,6 +60,9 @@
 #include "Gui/Seed/MnemonicSeedDialog.h"
 #include "Mnemonics/electrum-words.h"
 
+// private keys
+#include "Gui/PrivateKey/PrivateKeysDialog.h"
+
 extern "C"
 {
 #include "crypto/keccak.h"
@@ -255,6 +258,7 @@ void MainWindow::walletOpened() {
   if (!walletAdapter->isDeterministic()) {
     m_ui->m_showMnemonicSeedAction->setEnabled(false);
   } else {
+	  // TODO
 	m_ui->m_showMnemonicSeedAction->setEnabled(true);
   }
   
@@ -392,6 +396,12 @@ void MainWindow::setOpenedState() {
   m_ui->m_backupWalletAction->setEnabled(true);
   m_ui->m_resetAction->setEnabled(true);
   m_ui->m_exportTrackingKeyAction->setEnabled(true);
+  // Enable
+  m_ui->m_showMnemonicSeedAction->setEnabled(true);
+  m_ui->m_saveKeysAction->setEnabled(true);
+  m_ui->m_exportKeyAction->setEnabled(true);
+  m_ui->m_showPrivateKeyAction->setEnabled(true);
+  
   m_ui->m_encryptWalletAction->setEnabled(!walletAdapter->isEncrypted());
   m_ui->m_changePasswordAction->setEnabled(walletAdapter->isEncrypted());
 
@@ -414,6 +424,10 @@ void MainWindow::setClosedState() {
   m_ui->m_exportTrackingKeyAction->setEnabled(false);
   m_ui->m_encryptWalletAction->setEnabled(false);
   m_ui->m_changePasswordAction->setEnabled(false);
+  m_ui->m_showMnemonicSeedAction->setEnabled(false);
+  m_ui->m_saveKeysAction->setEnabled(false);
+  m_ui->m_exportKeyAction->setEnabled(false);
+  m_ui->m_showPrivateKeyAction->setEnabled(false);
 
   m_ui->m_overviewFrame->hide();
   m_ui->m_sendFrame->hide();
@@ -798,7 +812,7 @@ void MainWindow::restoreFromMnemonicSeed() {
 		Crypto::SecretKey private_view_key;
 		Crypto::PublicKey public_view_key;
 	
-		Crypto::generate_keys_from_seed(public_view_key, private_view_key, second);
+		Crypto::generate_deterministic_keys(public_view_key, private_view_key, second);
 		
 		keys.spendKeys.secretKey = private_spend_key;
 		keys.spendKeys.publicKey = public_spend_key;
@@ -832,6 +846,13 @@ void MainWindow::showMnemonicSeed() {
   // KeyDialog dlg(keys, false, this); 
   QByteArray keys = convertAccountKeysToByteArray(accountKeys);
   MnemonicSeedDialog dlg(keys, this);
+  dlg.exec();
+}
+
+void MainWindow::showPrivateKey() {
+  AccountKeys accountKeys = m_cryptoNoteAdapter->getNodeAdapter()->getWalletAdapter()->getAccountKeys(0);
+  QByteArray keys = convertAccountKeysToByteArray(accountKeys);
+  PrivateKeysDialog dlg(keys, this);
   dlg.exec();
 }
 

@@ -64,6 +64,7 @@ public:
     QAction *m_saveKeysAction;
     QAction *m_exportKeyAction;
 	QAction *m_showMnemonicSeedAction;
+	QAction *m_showPrivateKeyAction;
 	QAction *m_restoreFromMnemonicSeedAction;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout_2;
@@ -196,8 +197,13 @@ public:
         m_saveKeysAction->setObjectName(QStringLiteral("m_saveKeysAction"));
         m_exportKeyAction = new QAction(MainWindow);
         m_exportKeyAction->setObjectName(QStringLiteral("m_exportKeyAction"));
+		
         m_showMnemonicSeedAction = new QAction(MainWindow);
-        m_showMnemonicSeedAction->setObjectName(QStringLiteral("m_showMnemonicSeedAction"));	
+        m_showMnemonicSeedAction->setObjectName(QStringLiteral("m_showMnemonicSeedAction"));
+		
+		m_showPrivateKeyAction =  new QAction(MainWindow);
+		m_showPrivateKeyAction->setObjectName(QStringLiteral("m_showPrivateKeyAction"));
+		
         m_restoreFromMnemonicSeedAction = new QAction(MainWindow);
         m_restoreFromMnemonicSeedAction->setObjectName(QStringLiteral("m_restoreFromMnemonicSeedAction"));
         centralwidget = new QWidget(MainWindow);
@@ -578,6 +584,7 @@ public:
 		menuFile->addSeparator();
 		menuFile->addAction(m_restoreFromMnemonicSeedAction);
 		menuFile->addAction(m_showMnemonicSeedAction);
+		menuFile->addAction(m_showPrivateKeyAction);
 		menuFile->addSeparator();
         menuFile->addAction(m_exitAction);
         menuSettings->addAction(m_encryptWalletAction);
@@ -623,6 +630,7 @@ public:
         QObject::connect(m_saveKeysAction, SIGNAL(triggered()), MainWindow, SLOT(saveWalletKeys()));
         QObject::connect(m_exportKeyAction, SIGNAL(triggered()), MainWindow, SLOT(exportKey()));
 		QObject::connect(m_showMnemonicSeedAction, SIGNAL(triggered()), MainWindow, SLOT(showMnemonicSeed()));
+		QObject::connect(m_showPrivateKeyAction, SIGNAL(triggered()), MainWindow, SLOT(showPrivateKey()));
 		QObject::connect(m_restoreFromMnemonicSeedAction, SIGNAL(triggered()), MainWindow, SLOT(restoreFromMnemonicSeed()));
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -661,10 +669,12 @@ public:
         m_saveKeysAction->setText(QApplication::translate("MainWindow", "Save wallet keys", 0));
         m_exportKeyAction->setText(QApplication::translate("MainWindow", "Export key", 0));
 		m_showMnemonicSeedAction->setText(QApplication::translate("MainWindow", "Show Mnemonic Seed", 0));
+		m_showPrivateKeyAction->setText(QApplication::translate("MainWindow", "Show Private Keys", 0)); //m_showPrivateKeyAction
 		m_restoreFromMnemonicSeedAction->setText(QApplication::translate("MainWindow", "Restore from Mnemonic Seed", 0));
 #ifndef QT_NO_TOOLTIP
         m_exportKeyAction->setToolTip(QApplication::translate("MainWindow", "Export key", 0));
 		m_showMnemonicSeedAction->setText(QApplication::translate("MainWindow", "Show Mnemonic Seed", 0));
+		m_showPrivateKeyAction->setText(QApplication::translate("MainWindow", "Show Private Keys", 0)); //m_showPrivateKeyAction
 		m_restoreFromMnemonicSeedAction->setText(QApplication::translate("MainWindow", "Restore from Mnemonic Seed", 0));
 #endif // QT_NO_TOOLTIP
         m_logoLabel->setText(QString());

@@ -137,6 +137,7 @@ private:
   Q_SLOT void showPreferences();
   Q_SLOT void communityForumTriggered();
   Q_SLOT void reportIssueTriggered();
+  Q_SLOT void showPrivateKey();
 
 Q_SIGNALS:
   void reinitCryptoNoteAdapterSignal();

@@ -35,7 +35,7 @@ namespace {
 
 const char BLOG_RSS_SCHEME[] = "https";
 const char BLOG_RSS_HOST[] = "wrkz.work";
-const char BLOG_RSS_PATH[] = "/blog/feed.atom/";
+const char BLOG_RSS_PATH[] = "/syndication.php?type=rss";
 
 const char BLOG_RSS_ID_TAG_NAME[] = "id";
 const char BLOG_RSS_LINK_TAG_NAME[] = "link";

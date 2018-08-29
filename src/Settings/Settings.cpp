@@ -73,7 +73,7 @@ const char OPTION_LANGUAGE[] = "Language"; // Language
 
 const quint64 VERSION_MAJOR = 0;
 const quint64 VERSION_MINOR = 1;
-const quint64 VERSION_PATCH = 0;
+const quint64 VERSION_PATCH = 2.8;
 
 }
 
@@ -397,8 +397,8 @@ bool Settings::isNewsEnabled() const {
 
   QJsonObject privacyParams = m_settings.value(OPTION_PRIVACY_PARAMS).toObject();
   //return privacyParams.contains(OPTION_PRIVACY_NEWS_ENABLED) ? privacyParams.value(OPTION_PRIVACY_NEWS_ENABLED).toBool() : false;
-  // Always allow news true
-  return true;
+  // Always allow news false
+  return false;
 }
 quint16 Settings::getLocalRpcPort() const {
   QReadLocker lock(&m_lock);

@@ -247,11 +247,11 @@ IWalletAdapter::WalletInitStatus WalletGreenWorker::createWithKeys(const QString
     SemaphoreUnlocker unlocker(m_walletSemaphore);
     int errorCode = 0;
     try {
-      m_wallet->initializeWithViewKey(_walletPath.toStdString(), "", _accountKeys.viewKeys.secretKey);
+      m_wallet->initializeWithViewKey(_walletPath.toStdString(), "", _accountKeys.viewKeys.secretKey, 0, true);
       if (std::memcmp(&_accountKeys.spendKeys.secretKey, &CryptoNote::NULL_SECRET_KEY, sizeof(Crypto::SecretKey)) == 0) {
-        m_wallet->createAddress(_accountKeys.spendKeys.publicKey);
+        m_wallet->createAddress(_accountKeys.spendKeys.publicKey, 0, false);
       } else {
-        m_wallet->createAddress(_accountKeys.spendKeys.secretKey);
+        m_wallet->createAddress(_accountKeys.spendKeys.secretKey, 0, false);
       }
     } catch (const std::system_error& _error) {
       WalletLogger::critical(tr("[Wallet] Import keys error: %1").arg(_error.code().message().data()));
